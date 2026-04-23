@@ -23,11 +23,6 @@ function ContactsPage() {
         <div className="contacts__main">
           <h1 className="contacts__title">Контакты</h1>
 
-          <div className="contacts__org">
-            <p>Автономная некоммерческая организация информационных технологий «Цифровые технологии для общества»</p>
-            <p>ОГРН 1183328015628</p>
-          </div>
-
           <div className="contacts__info">
             <p><strong>Телефон:</strong> +7 (910) 175-09-03</p>
             <p><strong>E-mail:</strong> <a href="mailto:info@tourism33.ru">info@tourism33.ru</a></p>
