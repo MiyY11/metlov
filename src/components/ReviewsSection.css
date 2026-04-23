@@ -67,7 +67,7 @@
 }
 
 .review-card__name {
-  font-weight: 600;
+  font-weight: 700;
   color: #1a1a2e;
   font-size: 1rem;
 }
@@ -75,6 +75,7 @@
 .review-card__place {
   font-size: 0.85rem;
   color: #6b7280;
+  font-weight: 500;
 }
 
 .review-card__rating {
@@ -92,10 +93,11 @@
 }
 
 .review-card__text {
-  color: #4a5568;
-  line-height: 1.6;
+  color: #1a1a2e;
+  line-height: 1.7;
   margin-bottom: 1rem;
   font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .review-card__footer {

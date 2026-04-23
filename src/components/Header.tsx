@@ -12,7 +12,7 @@ function Header() {
       <div className="container header__container">
         <a href="/" className="header__logo-link">
           <div className="header__logo">
-            <span className="header__logo-text">Места для туристов!</span>
+            <img src="/images/kremlin.png" alt="Места для туристов!" className="header__logo-image" />
           </div>
         </a>
 
@@ -21,7 +21,6 @@ function Header() {
             <>
               <a href="#search" className="header__nav-link">Поиск</a>
               <a href="#map" className="header__nav-link">Карта</a>
-              <a href="#reviews" className="header__nav-link">Отзывы</a>
               <a href="#suggest" className="header__nav-link">Предложить место</a>
               <a href="#excursions" className="header__nav-link">Предложенные места</a>
             </>
@@ -29,7 +28,6 @@ function Header() {
             <>
               <Link to="/#search" className="header__nav-link">Поиск</Link>
               <Link to="/#map" className="header__nav-link">Карта</Link>
-              <Link to="/#reviews" className="header__nav-link">Отзывы</Link>
               <Link to="/suggest" className="header__nav-link">Предложить место</Link>
               <Link to="/#excursions" className="header__nav-link">Предложенные места</Link>
             </>

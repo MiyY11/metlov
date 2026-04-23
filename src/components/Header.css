@@ -1,10 +1,13 @@
 .header {
-  background: linear-gradient(135deg, #a8d8ea 0%, #8ec8dc 100%);
-  position: sticky;
+  background: transparent;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .header__container {
@@ -30,13 +33,14 @@
   align-items: center;
   gap: 0.5rem;
   flex-shrink: 0;
+  position: relative;
+  left: 3rem;
 }
 
-.header__logo-text {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1a1a2e;
-  letter-spacing: -0.02em;
+.header__logo-image {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
 }
 
 .header__nav {
