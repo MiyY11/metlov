@@ -1,0 +1,76 @@
+.excursions-section {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, #f0f8ff 0%, #e6f3fa 100%);
+}
+
+.excursions-section__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.excursions-section__title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+}
+
+.excursions-section__subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+}
+
+.excursions-section__grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.excursions-section__grid .place-card-wrapper {
+  width: 240px;
+  position: relative;
+}
+
+.place-card-wrapper {
+  position: relative;
+}
+
+.place-card-delete {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+  line-height: 1;
+}
+
+.place-card-delete:hover {
+  background: #dc2626;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .excursions-section {
+    padding: 3rem 0;
+  }
+
+  .excursions-section__title {
+    font-size: 1.75rem;
+  }
+
+  .excursions-section__grid {
+    grid-template-columns: 1fr;
+  }
+}

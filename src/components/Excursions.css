@@ -1,0 +1,59 @@
+.excursions {
+  padding: 3rem 0;
+  background: #f9fafb;
+}
+
+.excursions__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.excursions__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.excursions__partner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #374151;
+  font-weight: 600;
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.excursions__partner:hover {
+  color: #e8434f;
+}
+
+.excursions__partner svg {
+  width: 28px;
+  height: 28px;
+}
+
+.excursions__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .excursions__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .excursions__title {
+    font-size: 1.5rem;
+  }
+
+  .excursions__grid {
+    grid-template-columns: 1fr;
+  }
+}

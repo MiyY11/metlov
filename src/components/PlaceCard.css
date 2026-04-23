@@ -1,0 +1,68 @@
+.place-card {
+  display: block;
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border-color);
+  height: 100%;
+}
+
+.place-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.place-card__content {
+  padding: 1rem;
+}
+
+.place-card__category {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  background: rgba(33, 150, 243, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.place-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.place-card__rating-star {
+  color: #fbbf24;
+  font-size: 1.1rem;
+}
+
+.place-card__rating-value {
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.place-card__rating-count {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.place-card__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.place-card__address {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

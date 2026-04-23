@@ -1,0 +1,138 @@
+.suggest {
+  padding: 3rem 0;
+  min-height: 100vh;
+  background: var(--bg-secondary);
+  position: relative;
+}
+
+.suggest__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.suggest__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.suggest__cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #fee2e2;
+  border-radius: 50%;
+  color: #dc2626;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.suggest__cancel:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.suggest__close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #fee2e2;
+  border-radius: 50%;
+  color: #dc2626;
+  transition: all 0.2s;
+  text-decoration: none;
+  z-index: 10;
+}
+
+.suggest__close-btn:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.suggest__subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.suggest__form {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+}
+
+.form-submit {
+  padding: 1rem 2rem;
+  color: white;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+}
+
+.form-submit--disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-submit--valid {
+  background: var(--primary-color);
+}
+
+.form-submit--valid:hover {
+  background: var(--primary-hover);
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

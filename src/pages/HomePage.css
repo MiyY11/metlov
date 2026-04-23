@@ -1,0 +1,7 @@
+.home-page {
+  background: var(--bg-color);
+}
+
+.home-page > section {
+  scroll-margin-top: 80px;
+}

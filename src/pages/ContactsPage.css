@@ -1,0 +1,172 @@
+.contacts {
+  padding: 3rem 0;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.contacts__layout {
+  display: flex;
+  gap: 3rem;
+  max-width: 900px;
+}
+
+.contacts__main {
+  flex: 1;
+}
+
+.contacts__title {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.contacts__org {
+  margin-bottom: 1.5rem;
+}
+
+.contacts__org p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.contacts__info {
+  margin-bottom: 1.5rem;
+}
+
+.contacts__info p {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.contacts__info a {
+  color: #dc2626;
+  text-decoration: underline;
+}
+
+.contacts__divider {
+  border: none;
+  border-top: 1px dotted #ccc;
+  margin: 2rem 0;
+}
+
+.contacts__form-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.contacts__form {
+  max-width: 500px;
+}
+
+.contacts__form-group {
+  margin-bottom: 1rem;
+}
+
+.contacts__form-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+  color: #333;
+}
+
+.contacts__form-group label .required {
+  color: #dc2626;
+}
+
+.contacts__form-group input,
+.contacts__form-group textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.contacts__form-group input:focus,
+.contacts__form-group textarea:focus {
+  border-color: #2196f3;
+}
+
+.contacts__submit-btn {
+  padding: 0.75rem 2rem;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.contacts__submit-btn:hover {
+  background: #b91c1c;
+}
+
+.contacts__success {
+  padding: 0.75rem 1rem;
+  background: #dcfce7;
+  color: #166534;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.contacts__sidebar {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.contacts__sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.contacts__sidebar-item {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  border-bottom: 1px solid #e5e5e5;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.contacts__sidebar-item:last-child {
+  border-bottom: none;
+}
+
+.contacts__sidebar-item:hover {
+  background: #f5f5f5;
+}
+
+.contacts__sidebar-item--active {
+  color: #dc2626;
+  font-weight: 600;
+  border-left: 2px solid #dc2626;
+  background: #fef2f2;
+}
+
+@media (max-width: 768px) {
+  .contacts__layout {
+    flex-direction: column-reverse;
+  }
+
+  .contacts__sidebar {
+    width: 100%;
+  }
+
+  .contacts__title {
+    font-size: 1.75rem;
+  }
+}
