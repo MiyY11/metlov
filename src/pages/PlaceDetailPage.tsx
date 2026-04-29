@@ -1,20 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 import { placesData } from '../data/places'
-import type { Place, Review } from '../types'
+import type { Place, Review, SuggestedPlace } from '../types'
 import './PlaceDetailPage.css'
-
-interface SuggestedPlaceData {
-  name: string
-  category: string
-  description: string
-  address: string
-  suggestedBy: string
-  email: string
-}
 
 function PlaceDetailPage() {
   const { id } = useParams<{ id: string }>()
+  const { user, isAdmin } = useAuth()
   const placeId = Number(id)
   const reviewsRef = useRef<HTMLDivElement>(null)
 
@@ -29,16 +22,15 @@ function PlaceDetailPage() {
     if (placeId < 100) return undefined
     const stored = localStorage.getItem('suggestedPlaces')
     if (stored) {
-      const parsed: SuggestedPlaceData[] = JSON.parse(stored)
-      const index = placeId - 100
-      if (parsed[index]) {
-        const p = parsed[index]
+      const parsed: SuggestedPlace[] = JSON.parse(stored)
+      const found = parsed.find(p => p.id === placeId)
+      if (found) {
         return {
           id: placeId,
-          name: p.name,
-          category: p.category,
-          description: p.description,
-          address: p.address,
+          name: found.name,
+          category: found.category,
+          description: found.description,
+          address: found.address,
           rating: 4.5,
           reviewsCount: 0,
           price: undefined,
@@ -52,7 +44,7 @@ function PlaceDetailPage() {
 
   const place = placesData.find(p => p.id === placeId) || loadSuggestedPlace()
   const [showReviewForm, setShowReviewForm] = useState(false)
-  const [newReview, setNewReview] = useState({ author: '', rating: 5, text: '' })
+  const [newReview, setNewReview] = useState({ rating: 5, text: '' })
 
   const storageKey = `reviews_${id}`
 
@@ -63,21 +55,50 @@ function PlaceDetailPage() {
 
   const handleSubmitReview = (e: React.FormEvent) => {
     e.preventDefault()
-    if (newReview.author && newReview.text) {
+    if (!user) return
+    
+    if (newReview.text) {
       const review: Review = {
         id: Date.now(),
-        author: newReview.author,
+        author: user.name,
         rating: newReview.rating,
         text: newReview.text,
         date: new Date().toISOString().split('T')[0],
+        userId: user.id,
       }
       const updatedReviews = [review, ...reviews]
       setReviews(updatedReviews)
       localStorage.setItem(storageKey, JSON.stringify(updatedReviews))
-      setNewReview({ author: '', rating: 5, text: '' })
+      setNewReview({ rating: 5, text: '' })
       setShowReviewForm(false)
       window.dispatchEvent(new CustomEvent('reviewUpdated'))
     }
+  }
+
+  const handleReviewButtonClick = () => {
+    if (!user) {
+      alert('Для написания отзыва необходимо войти в аккаунт')
+      return
+    }
+    setShowReviewForm(!showReviewForm)
+  }
+
+  const handleDeleteReview = (reviewId: number) => {
+    if (!user) {
+      alert('Для удаления отзыва необходимо войти в аккаунт')
+      return
+    }
+
+    const review = reviews.find(r => r.id === reviewId)
+    if (!isAdmin() && review?.userId !== user.id) {
+      alert('Вы можете удалять только свои отзывы')
+      return
+    }
+
+    const updatedReviews = reviews.filter(r => r.id !== reviewId)
+    setReviews(updatedReviews)
+    localStorage.setItem(storageKey, JSON.stringify(updatedReviews))
+    window.dispatchEvent(new CustomEvent('reviewUpdated'))
   }
 
   if (!place) {
@@ -120,7 +141,18 @@ function PlaceDetailPage() {
                       <span className="review-card__rating">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</span>
                     </div>
                     <p className="review-card__text">{review.text}</p>
-                    <span className="review-card__date">{review.date}</span>
+                    <div className="review-card__footer">
+                      <span className="review-card__date">{review.date}</span>
+                      {(user?.id === review.userId || isAdmin()) && (
+                        <button
+                          className="review-card__delete"
+                          onClick={() => handleDeleteReview(review.id)}
+                          title="Удалить отзыв"
+                        >
+                          Удалить
+                        </button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -132,24 +164,13 @@ function PlaceDetailPage() {
               <>
                 <button
                   className="place-detail__review-btn"
-                  onClick={() => setShowReviewForm(!showReviewForm)}
+                  onClick={handleReviewButtonClick}
                 >
                   Написать отзыв
                 </button>
 
                 {showReviewForm && (
                   <form className="place-detail__review-form" onSubmit={handleSubmitReview}>
-                    <div className="form-group">
-                      <label htmlFor="author">Ваше имя</label>
-                      <input
-                        id="author"
-                        type="text"
-                        value={newReview.author}
-                        onChange={(e) => setNewReview({ ...newReview, author: e.target.value })}
-                        required
-                      />
-                    </div>
-
                     <div className="form-group">
                       <label>Оценка</label>
                       <div className="rating-stars">

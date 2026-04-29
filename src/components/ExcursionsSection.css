@@ -1,6 +1,6 @@
 .excursions-section {
-  padding: 5rem 0;
-  background: linear-gradient(180deg, #f0f8ff 0%, #e6f3fa 100%);
+  padding: 4rem 0;
+  background: linear-gradient(180deg, #f0f8ff 0%, #ffffff 100%);
 }
 
 .excursions-section__header {
@@ -59,6 +59,93 @@
 .place-card-delete:hover {
   background: #dc2626;
   color: white;
+}
+
+.moderation-panel {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e8f0f8;
+  margin-bottom: 2rem;
+}
+
+.moderation-panel__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 1rem;
+}
+
+.moderation-panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.moderation-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.moderation-item__info {
+  flex: 1;
+}
+
+.moderation-item__name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 0.25rem;
+}
+
+.moderation-item__details {
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-bottom: 0.25rem;
+}
+
+.moderation-item__author {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.moderation-item__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.moderation-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.moderation-btn--approve {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.moderation-btn--approve:hover {
+  background: #bbf7d0;
+}
+
+.moderation-btn--reject {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.moderation-btn--reject:hover {
+  background: #fecaca;
 }
 
 @media (max-width: 768px) {

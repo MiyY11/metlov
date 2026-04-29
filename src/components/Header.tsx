@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 import './Header.css'
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const { user, logout } = useAuth()
 
   return (
     <header className="header">
@@ -33,6 +35,20 @@ function Header() {
             </>
           )}
         </nav>
+
+        <div className="header__actions">
+          {user ? (
+            <div className="header__user-menu">
+              <span className="header__user-name">{user.name}</span>
+              <button className="header__logout-btn" onClick={logout}>Выйти</button>
+            </div>
+          ) : (
+            <div className="header__auth-buttons">
+              <Link to="/login" className="header__login-btn">Войти</Link>
+              <Link to="/register" className="header__register-btn">Регистрация</Link>
+            </div>
+          )}
+        </div>
 
         <a href="/contacts" className="header__contacts-btn">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none">

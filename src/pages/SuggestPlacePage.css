@@ -5,6 +5,58 @@
   position: relative;
 }
 
+.suggest__auth-required {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e8f0f8;
+}
+
+.auth-btn {
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.35);
+  margin: 0.5rem;
+}
+
+.auth-btn--secondary {
+  background: white;
+  color: #2196f3;
+  border: 1px solid #2196f3;
+  box-shadow: none;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.45);
+}
+
+.auth-btn--secondary:hover {
+  background: #2196f3;
+  color: white;
+}
+
+.suggest__error {
+  padding: 0.75rem 1rem;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #fecaca;
+}
+
 .suggest__title {
   font-size: 2.5rem;
   font-weight: 800;

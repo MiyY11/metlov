@@ -1,31 +1,26 @@
 import { useState } from 'react'
+import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import type { SuggestedPlace } from '../types'
 import './SuggestPlacePage.css'
 
-interface SuggestedPlaceData {
-  name: string
-  category: string
-  description: string
-  address: string
-  suggestedBy: string
-  email: string
-}
-
 function SuggestPlacePage() {
-  const [formData, setFormData] = useState<SuggestedPlaceData>({
+  const { user } = useAuth()
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
     name: '',
     category: '',
     description: '',
     address: '',
-    suggestedBy: '',
     email: '',
   })
+  const [error, setError] = useState('')
 
   const isFormValid =
     formData.name.trim() !== '' &&
     formData.category !== '' &&
     formData.description.trim() !== '' &&
-    formData.address.trim() !== '' &&
-    formData.suggestedBy.trim() !== ''
+    formData.address.trim() !== ''
 
   const categories = [
     'Достопримечательности',
@@ -38,15 +33,79 @@ function SuggestPlacePage() {
     'Другое',
   ]
 
+  const checkDuplicate = (name: string, address: string): boolean => {
+    const stored = localStorage.getItem('suggestedPlaces')
+    if (stored) {
+      const parsed: SuggestedPlace[] = JSON.parse(stored)
+      const isDuplicate = parsed.some(
+        place => place.name.toLowerCase() === name.toLowerCase() && 
+                 place.address.toLowerCase() === address.toLowerCase()
+      )
+      if (isDuplicate) return true
+    }
+    
+    const placesData = localStorage.getItem('placesData')
+    if (placesData) {
+      const parsed = JSON.parse(placesData)
+      const isDuplicate = parsed.some(
+        (place: any) => place.name.toLowerCase() === name.toLowerCase() && 
+                       place.address.toLowerCase() === address.toLowerCase()
+      )
+      if (isDuplicate) return true
+    }
+    
+    return false
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
+
+    if (!user) {
+      navigate('/login')
+      return
+    }
+
+    if (checkDuplicate(formData.name, formData.address)) {
+      setError('Место с таким названием и адресом уже существует')
+      return
+    }
 
     const stored = localStorage.getItem('suggestedPlaces')
-    const existing: SuggestedPlaceData[] = stored ? JSON.parse(stored) : []
-    existing.push(formData)
+    const existing: SuggestedPlace[] = stored ? JSON.parse(stored) : []
+    
+    const newPlace: SuggestedPlace = {
+      id: Date.now(),
+      name: formData.name,
+      category: formData.category,
+      description: formData.description,
+      address: formData.address,
+      suggestedBy: user.name,
+      suggestedById: user.id,
+      email: formData.email || user.email,
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+    }
+    
+    existing.push(newPlace)
     localStorage.setItem('suggestedPlaces', JSON.stringify(existing))
 
-    window.location.href = '/#excursions'
+    navigate('/#excursions')
+  }
+
+  if (!user) {
+    return (
+      <section className="suggest">
+        <div className="container">
+          <div className="suggest__auth-required">
+            <h1 className="suggest__title">Требуется авторизация</h1>
+            <p className="suggest__subtitle">Для предложения места необходимо войти в аккаунт</p>
+            <button className="auth-btn" onClick={() => navigate('/login')}>Войти</button>
+            <button className="auth-btn auth-btn--secondary" onClick={() => navigate('/register')}>Зарегистрироваться</button>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -63,6 +122,8 @@ function SuggestPlacePage() {
         <p className="suggest__subtitle">
           Знаете интересное место? Расскажите нам о нём!
         </p>
+
+        {error && <div className="suggest__error">{error}</div>}
 
         <form className="suggest__form" onSubmit={handleSubmit}>
           <div className="form-row">
@@ -118,28 +179,15 @@ function SuggestPlacePage() {
             />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="suggestedBy">Ваше имя *</label>
-              <input
-                id="suggestedBy"
-                type="text"
-                value={formData.suggestedBy}
-                onChange={(e) => setFormData({ ...formData, suggestedBy: e.target.value })}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Для связи с вами"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="email">Email (для связи)</label>
+            <input
+              id="email"
+              type="email"
+              placeholder={user.email}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
           </div>
 
           <button type="submit" className={`form-submit ${isFormValid ? 'form-submit--valid' : 'form-submit--disabled'}`} disabled={!isFormValid}>
